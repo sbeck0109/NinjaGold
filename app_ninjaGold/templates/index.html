@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ninja Gold</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+  </head>
+  <body>
+    <div id="gold">
+      <h2>Your Gold:</h2>
+      <h2 id="gold_counter">{{request.session.score}}</h2>
+      <h4>Your Move Count:</h4>
+      <div class="inline-b">{{ request.session.movecount}}</div>
+    </div>
+    <!-- card 1 -->
+    <div style="display: inline-block;">
+      <div
+        class="farm"
+        style="width: 200px; height: 200px; border: 2px solid black;"
+      >
+        <div style="text-align: center; margin-top: 50px;">
+          <h3>Farm</h3>
+          <p>(earns 10-20 golds)</p>
+          <form action="{% url 'my_process' %}" method="POST">
+            {% csrf_token %}
+            <input type="hidden" />
+            <button name="farm" type="submit">Find Gold!</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <!-- card 2 -->
+    <div style="display: inline-block;">
+      <div
+        class="cave"
+        style="width: 200px; height: 200px; border: 2px solid black;"
+      >
+        <div style="text-align: center; margin-top: 50px;">
+          <h3>Cave</h3>
+          <p>(earns 5-10 golds)</p>
+          <form action="{% url 'my_process' %}" method="POST">
+            {% csrf_token %}
+            <input type="hidden" />
+            <button name="cave" type="submit">Find Gold!</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <!-- card 3 -->
+    <div style="display: inline-block;">
+      <div
+        class="house"
+        style="width: 200px; height: 200px; border: 2px solid black;"
+      >
+        <div style="text-align: center; margin-top: 50px;">
+          <h3>House</h3>
+          <p>(earns 2-5 golds)</p>
+          <form action="{% url 'my_process' %}" method="POST">
+            {% csrf_token %}
+            <input type="hidden" />
+            <button name="house" type="submit">Find Gold!</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <!-- card 4 -->
+    <div style="display: inline-block;">
+      <div
+        class="casino"
+        style="width: 200px; height: 200px; border: 2px solid black;"
+      >
+        <div style="text-align: center; margin-top: 50px;">
+          <h3>Casino</h3>
+          <p>(earns 0-50 golds)</p>
+          <form action="{% url 'my_process' %}" method="POST">
+            {% csrf_token %}
+            <input type="hidden" />
+            <button name="casino" type="submit">Find Gold!</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <!-- message box -->
+    <div id="activity_row">
+      <p>Activities:</p>
+      <br>
+      <div id="activity_log" class="container-fluid">
+        {% for message in messages reversed %} {{message}}<br />
+        {% endfor %}
+        <form action="{% url 'my_starting' %}" method="POST">
+          {% csrf_token %}
+          <br>
+          <button type="submit">Start New Game</button>
+          <input type="hidden" name="starting" />
+      </div>
+    </div>
+  </body>
+</html>
